@@ -20,7 +20,7 @@ namespace FitnessPlace.Business.Services
         {
             try
             {
-                var result = _membersRepository.GetAsync();
+                var result = await _membersRepository.GetAsync();
                 return _mapper.Map<IList<MemberDto>>(result);
             }
             catch
