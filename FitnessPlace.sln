@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessPlace.DataAccess", "FitnessPlace.DataAccess\FitnessPlace.DataAccess.csproj", "{638D2E25-AE25-4FD0-9624-8C028B9B9E07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessPlace.Business", "FitnessPlace.Business\FitnessPlace.Business.csproj", "{40C3C769-9D17-48FE-A932-889FF5C6B28E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{638D2E25-AE25-4FD0-9624-8C028B9B9E07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{638D2E25-AE25-4FD0-9624-8C028B9B9E07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{638D2E25-AE25-4FD0-9624-8C028B9B9E07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40C3C769-9D17-48FE-A932-889FF5C6B28E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40C3C769-9D17-48FE-A932-889FF5C6B28E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40C3C769-9D17-48FE-A932-889FF5C6B28E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40C3C769-9D17-48FE-A932-889FF5C6B28E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
