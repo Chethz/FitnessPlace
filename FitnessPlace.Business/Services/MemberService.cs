@@ -7,7 +7,7 @@ using FitnessPlace.DataAccess.Models;
 
 namespace FitnessPlace.Business.Services
 {
-    public class MemberService : IMemberService<Member>
+    public class MemberService : IMemberService<Member, MemberDto>
     {
         private readonly IMapper _mapper;
         public readonly IGenericRepository<Member> _membersRepository;
@@ -18,12 +18,12 @@ namespace FitnessPlace.Business.Services
             _membersRepository = memberRepository;
         }
 
-        public async Task<IEnumerable<Member>> GetAsync(bool tracked = true)
+        public async Task<IEnumerable<MemberDto>> GetAsync(bool tracked)
         {
             try
             {
-                return await _membersRepository.GetAsync();
-                // return _mapper.Map<IEnumerable<MemberDto>>(result);
+                var result = await _membersRepository.GetAsync();
+                return _mapper.Map<IEnumerable<MemberDto>>(result);
             }
             catch (Exception ex)
             {
@@ -31,7 +31,7 @@ namespace FitnessPlace.Business.Services
             }
         }
 
-        public async Task<Member> GetByIdAsync(int id)
+        public async Task<MemberDto> GetByIdAsync(int id)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace FitnessPlace.Business.Services
                 {
                     throw new Exception();
                 }
-                return result;
+                return _mapper.Map<MemberDto>(result);
             }
             catch (Exception ex)
             {
@@ -49,11 +49,12 @@ namespace FitnessPlace.Business.Services
             }
         }
 
-        public async Task<List<Member?>> GetWithMemberDetailsAsync(Expression<Func<Member, object>> include)
+        public async Task<List<MemberDto?>> GetWithMemberDetailsAsync(Expression<Func<Member, object>> include)
         {
             try
             {
-                return await _membersRepository.GetWithMemberDetailsAsync(include);
+                var result = await _membersRepository.GetWithMemberDetailsAsync(include);
+                return _mapper.Map<List<MemberDto>>(result);
             }
             catch (Exception ex)
             {

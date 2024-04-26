@@ -5,10 +5,10 @@ using FitnessPlace.DataAccess.Models;
 
 namespace FitnessPlace.Business.Services.IServices
 {
-    public interface IMemberService<TEntity> where TEntity : class
+    public interface IMemberService<TEntity, TDto> where TEntity : class where TDto : class
     {
-        Task<IEnumerable<TEntity>> GetAsync(bool tracked = true);
-        Task<TEntity?> GetByIdAsync(int id);
-        Task<List<TEntity?>> GetWithMemberDetailsAsync(Expression<Func<TEntity, object>> include);
+        Task<IEnumerable<TDto>> GetAsync(bool tracked = true);
+        Task<TDto?> GetByIdAsync(int id);
+        Task<List<TDto?>> GetWithMemberDetailsAsync(Expression<Func<TEntity, object>> include);
     }
 }
