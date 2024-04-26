@@ -28,7 +28,7 @@ namespace FitnessPlace.DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.ToString());
+                throw new Exception(ex.Message);
             }
         }
 
@@ -40,7 +40,7 @@ namespace FitnessPlace.DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.ToString());
+                throw new Exception(ex.Message);
             }
         }
 
@@ -51,8 +51,14 @@ namespace FitnessPlace.DataAccess.Repositories
             {
                 throw new Exception("Expression is null");
             }
-            return await query.Include(include).ToListAsync();
-
+            try
+            {
+                return await query.Include(include).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
