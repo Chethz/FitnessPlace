@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using FitnessPlace.Business.Mappings;
 using FitnessPlace.Business.Services;
 using FitnessPlace.DataAccess;
@@ -28,6 +29,9 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 
 //Asset Mapping
 builder.Services.AddScoped(typeof(MemberService), typeof(MemberService));
+
+builder.Services.AddControllers().AddJsonOptions(x =>
+   x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
 var app = builder.Build();
 
