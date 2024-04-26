@@ -1,11 +1,12 @@
 using AutoMapper;
 using FitnessPlace.Business.DTOs;
+using FitnessPlace.Business.Services.IServices;
 using FitnessPlace.DataAccess.Interfaces;
 using FitnessPlace.DataAccess.Models;
 
 namespace FitnessPlace.Business.Services
 {
-    public class MemberService
+    public class MemberService : IMemberService<Member>
     {
         private readonly IMapper _mapper;
         public readonly IGenericRepository<Member> _membersRepository;
@@ -16,16 +17,34 @@ namespace FitnessPlace.Business.Services
             _membersRepository = memberRepository;
         }
 
-        public async Task<IList<MemberDto>> GetAsync(bool tracked = true)
+        public async Task<IEnumerable<Member>> GetAsync(bool tracked = true)
         {
             try
             {
-                var result = await _membersRepository.GetAsync();
-                return _mapper.Map<IList<MemberDto>>(result);
+                return await _membersRepository.GetAsync();
+                // return _mapper.Map<IEnumerable<MemberDto>>(result);
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception("");
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<Member> GetByIdAsync(int id)
+        {
+            try
+            {
+                var result = await _membersRepository.GetByIdAsync(id);
+
+                if (result is null)
+                {
+                    throw new Exception();
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
     }
