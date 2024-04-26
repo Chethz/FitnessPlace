@@ -1,3 +1,4 @@
+using FitnessPlace.Business.Mappings;
 using FitnessPlace.Business.Services;
 using FitnessPlace.DataAccess;
 using FitnessPlace.DataAccess.Interfaces;
@@ -20,13 +21,15 @@ builder.Services.AddDbContext<FitnessPlaceDbContext>(
                     builder.Configuration.GetConnectionString("DefaultConnection"),
                     x => x.MigrationsAssembly("FitnessPlace.DataAccess")));
 
-var app = builder.Build();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 //Generic Repository
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
 //Asset Mapping
 builder.Services.AddScoped(typeof(MemberService), typeof(MemberService));
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
