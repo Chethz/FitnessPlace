@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using FitnessPlace.DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,6 +42,13 @@ namespace FitnessPlace.DataAccess.Repositories
             {
                 throw new Exception(ex.ToString());
             }
+        }
+
+        public async Task<List<T?>> GetWithMemberDetailsAsync(Expression<Func<T, object>> include)
+        {
+            IQueryable<T> query = _dbSet;
+
+            return await query.Include(include).ToListAsync();
         }
     }
 }

@@ -1,5 +1,8 @@
+using System.Linq.Expressions;
 using FitnessPlace.Business.DTOs;
 using FitnessPlace.Business.Services;
+using FitnessPlace.DataAccess.Models;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessPlace.API.Controller
@@ -19,7 +22,9 @@ namespace FitnessPlace.API.Controller
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> GetMembers()
         {
-            return Ok(await _service.GetAsync());
+            Expression<Func<Member, object>> expression = item => item.MemberDetail;
+            return Ok(await _service.GetWithMemberDetailsAsync(expression));
+            // return Ok(await _service.GetAsync());
         }
 
         [HttpGet("{id:int}")]

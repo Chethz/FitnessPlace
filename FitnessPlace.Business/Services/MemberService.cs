@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using AutoMapper;
 using FitnessPlace.Business.DTOs;
 using FitnessPlace.Business.Services.IServices;
@@ -41,6 +42,18 @@ namespace FitnessPlace.Business.Services
                     throw new Exception();
                 }
                 return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<List<Member?>> GetWithMemberDetailsAsync(Expression<Func<Member, object>> include)
+        {
+            try
+            {
+                return await _membersRepository.GetWithMemberDetailsAsync(include);
             }
             catch (Exception ex)
             {
