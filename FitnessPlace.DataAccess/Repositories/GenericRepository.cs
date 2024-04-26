@@ -47,8 +47,12 @@ namespace FitnessPlace.DataAccess.Repositories
         public async Task<List<T?>> GetWithMemberDetailsAsync(Expression<Func<T, object>> include)
         {
             IQueryable<T> query = _dbSet;
-
+            if (include == null)
+            {
+                throw new Exception("Expression is null");
+            }
             return await query.Include(include).ToListAsync();
+
         }
     }
 }
