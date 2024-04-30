@@ -1,7 +1,4 @@
 using System.Linq.Expressions;
-using FitnessPlace.Business.DTOs;
-using FitnessPlace.DataAccess.Interfaces;
-using FitnessPlace.DataAccess.Models;
 
 namespace FitnessPlace.Business.Services.IServices
 {

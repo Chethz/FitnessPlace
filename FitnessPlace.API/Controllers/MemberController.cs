@@ -2,7 +2,6 @@ using System.Linq.Expressions;
 using FitnessPlace.Business.DTOs;
 using FitnessPlace.Business.Services;
 using FitnessPlace.DataAccess.Models;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessPlace.API.Controller
