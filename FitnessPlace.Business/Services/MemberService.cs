@@ -21,15 +21,8 @@ namespace FitnessPlace.Business.Services
 
         public async Task<IEnumerable<MemberDto>> GetAsync(bool tracked)
         {
-            try
-            {
-                var result = await _membersRepository.GetAsync();
-                return _mapper.Map<IEnumerable<MemberDto>>(result);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            var result = await _membersRepository.GetAsync() ?? throw new EntityNotFoundException("Members not found.");
+            return _mapper.Map<IEnumerable<MemberDto>>(result);
         }
 
         public async Task<MemberDto?> GetByIdAsync(int id)
@@ -40,15 +33,12 @@ namespace FitnessPlace.Business.Services
 
         public async Task<List<MemberDto?>> GetWithMemberDetailsAsync(Expression<Func<Member, object>> include)
         {
-            try
+            if (include == null)
             {
-                var result = await _membersRepository.GetWithMemberDetailsAsync(include);
-                return _mapper.Map<List<MemberDto?>>(result);
+                throw new ArgumentNullException(nameof(include));
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            var result = await _membersRepository.GetWithMemberDetailsAsync(include) ?? throw new EntityNotFoundException("Member not found.");
+            return _mapper.Map<List<MemberDto?>>(result);
         }
     }
 }
