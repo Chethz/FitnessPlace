@@ -1,6 +1,8 @@
 namespace FitnessPlace.Business.Exceptions
 {
-    public class EntityNotFoundException(string message) : Exception(message)
+    public class EntityNotFoundException : Exception
     {
+        public EntityNotFoundException(string message) : base(message) { }
+        public EntityNotFoundException(string message, Exception? innerException) : base(message, innerException) { }
     }
 }
