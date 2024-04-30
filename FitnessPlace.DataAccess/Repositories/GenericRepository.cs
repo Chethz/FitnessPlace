@@ -22,43 +22,24 @@ namespace FitnessPlace.DataAccess.Repositories
             {
                 query = query.AsNoTracking();
             }
-            try
-            {
-                return await query.ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+
+            return await query.ToListAsync();
         }
 
         public async Task<T?> GetByIdAsync(int id)
         {
-            try
-            {
-                return await _dbSet.FindAsync(id);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return await _dbSet.FindAsync(id);
+
         }
 
         public async Task<List<T?>> GetWithMemberDetailsAsync(Expression<Func<T, object>> include)
         {
-            IQueryable<T> query = _dbSet;
+            IQueryable<T?> query = _dbSet;
             if (include == null)
             {
                 throw new Exception("Expression is null");
             }
-            try
-            {
-                return await query.Include(include).ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return await query.Include(include).ToListAsync();
         }
     }
 }
