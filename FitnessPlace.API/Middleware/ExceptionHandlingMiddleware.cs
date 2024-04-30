@@ -1,5 +1,6 @@
 using System.Net;
 using FitnessPlace.Business.Exceptions;
+using Microsoft.Data.SqlClient;
 
 namespace FitnessPlace.API.Middleware
 {
@@ -14,6 +15,11 @@ namespace FitnessPlace.API.Middleware
             catch (EntityNotFoundException ex)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                await context.Response.WriteAsync(ex.Message);
+            }
+            catch (SqlException ex)
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 await context.Response.WriteAsync(ex.Message);
             }
             catch (Exception ex)
