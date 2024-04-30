@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using FitnessPlace.API.Middleware;
 using FitnessPlace.Business.Mappings;
 using FitnessPlace.Business.Services;
 using FitnessPlace.DataAccess;
@@ -24,6 +25,9 @@ builder.Services.AddDbContext<FitnessPlaceDbContext>(
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
+//Middleware
+builder.Services.AddTransient<ExceptionHandlingMiddleware>();
+
 //Generic Repository
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
@@ -43,6 +47,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseAuthorization();
 
