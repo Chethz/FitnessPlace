@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using AutoMapper;
 using FitnessPlace.Business.DTOs;
+using FitnessPlace.Business.Exceptions;
 using FitnessPlace.Business.Services.IServices;
 using FitnessPlace.DataAccess.Interfaces;
 using FitnessPlace.DataAccess.Models;
@@ -31,22 +32,10 @@ namespace FitnessPlace.Business.Services
             }
         }
 
-        public async Task<MemberDto> GetByIdAsync(int id)
+        public async Task<MemberDto?> GetByIdAsync(int id)
         {
-            try
-            {
-                var result = await _membersRepository.GetByIdAsync(id);
-
-                if (result is null)
-                {
-                    throw new Exception();
-                }
-                return _mapper.Map<MemberDto>(result);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            var result = await _membersRepository.GetByIdAsync(id) ?? throw new EntityNotFoundException("Member not found.");
+            return _mapper.Map<MemberDto>(result);
         }
 
         public async Task<List<MemberDto?>> GetWithMemberDetailsAsync(Expression<Func<Member, object>> include)
@@ -54,7 +43,7 @@ namespace FitnessPlace.Business.Services
             try
             {
                 var result = await _membersRepository.GetWithMemberDetailsAsync(include);
-                return _mapper.Map<List<MemberDto>>(result);
+                return _mapper.Map<List<MemberDto?>>(result);
             }
             catch (Exception ex)
             {
