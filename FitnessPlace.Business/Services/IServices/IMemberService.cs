@@ -6,6 +6,6 @@ namespace FitnessPlace.Business.Services.IServices
 {
     public interface IMemberService : IGenericService<Member, MemberDto>
     {
-        Task<List<MemberDto?>> GetWithMemberDetailsAsync(Expression<Func<Member, object>> include);
+        Task<List<MemberDto?>> GetMemberWithDetailsAsync();
     }
 }

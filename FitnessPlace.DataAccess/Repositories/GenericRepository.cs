@@ -48,7 +48,7 @@ namespace FitnessPlace.DataAccess.Repositories
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task<List<T?>> GetWithMemberDetailsAsync(Expression<Func<T, object>> include)
+        public async Task<List<T?>> GetWithIncludeAsync(Expression<Func<T, object>> include)
         {
             IQueryable<T?> query = _dbSet;
             return await query.Include(include).ToListAsync();

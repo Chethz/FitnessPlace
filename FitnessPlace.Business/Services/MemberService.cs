@@ -31,9 +31,9 @@ namespace FitnessPlace.Business.Services
             return _mapper.Map<MemberDto>(result);
         }
 
-        public async Task<List<MemberDto?>> GetWithMemberDetailsAsync(Expression<Func<Member, object>> include)
+        public async Task<List<MemberDto?>> GetMemberWithDetailsAsync()
         {
-            var result = await _membersRepository.GetWithMemberDetailsAsync(include) ?? throw new EntityNotFoundException("Member not found.");
+            var result = await _membersRepository.GetWithIncludeAsync(item => item.MemberDetail) ?? throw new EntityNotFoundException("Member not found.");
             return _mapper.Map<List<MemberDto?>>(result);
         }
     }

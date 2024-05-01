@@ -28,8 +28,7 @@ namespace FitnessPlace.API.Controller
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> GetWithMemberDetailsAsync()
         {
-            Expression<Func<Member, object>> expression = item => item.MemberDetail;
-            return Ok(await _service.GetWithMemberDetailsAsync(expression));
+            return Ok(await _service.GetMemberWithDetailsAsync());
         }
 
         [HttpGet("{id:int}")]
