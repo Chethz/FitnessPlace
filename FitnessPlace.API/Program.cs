@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 using FitnessPlace.API.Middleware;
 using FitnessPlace.Business.Mappings;
 using FitnessPlace.Business.Services;
+using FitnessPlace.Business.Services.IServices;
 using FitnessPlace.DataAccess;
 using FitnessPlace.DataAccess.Interfaces;
 using FitnessPlace.DataAccess.Repositories;
@@ -32,10 +33,11 @@ builder.Services.AddTransient<ExceptionHandlingMiddleware>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
 //Asset Mapping
-builder.Services.AddScoped(typeof(MemberService), typeof(MemberService));
+builder.Services.AddScoped(typeof(IMemberService), typeof(MemberService));
 
+//Fixing object cycle issue
 builder.Services.AddControllers().AddJsonOptions(x =>
-   x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+   x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 var app = builder.Build();
 
