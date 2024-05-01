@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 using FitnessPlace.Business.DTOs;
-using FitnessPlace.Business.Services;
+using FitnessPlace.Business.Services.IServices;
 using FitnessPlace.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,9 +10,9 @@ namespace FitnessPlace.API.Controller
     [ApiController]
     public class MemberController : ControllerBase
     {
-        private MemberService _service;
+        private IMemberService _service;
 
-        public MemberController(MemberService service)
+        public MemberController(IMemberService service)
         {
             _service = service;
         }
