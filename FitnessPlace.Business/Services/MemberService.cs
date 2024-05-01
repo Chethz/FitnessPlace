@@ -8,7 +8,7 @@ using FitnessPlace.DataAccess.Models;
 
 namespace FitnessPlace.Business.Services
 {
-    public class MemberService : IMemberService<Member, MemberDto>
+    public class MemberService : IGenericService<Member, MemberDto>, IMemberService
     {
         private readonly IMapper _mapper;
         public readonly IGenericRepository<Member> _membersRepository;
