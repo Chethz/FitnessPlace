@@ -21,7 +21,7 @@ namespace FitnessPlace.API.Controller
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> GetMembers()
         {
-            return Ok(await _service.GetAsync(true));
+            return Ok(await _service.GetAsync());
         }
 
         [HttpGet("details")]
