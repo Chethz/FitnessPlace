@@ -1,11 +1,11 @@
 using System.Linq.Expressions;
+using FitnessPlace.Business.DTOs;
+using FitnessPlace.DataAccess.Models;
 
 namespace FitnessPlace.Business.Services.IServices
 {
-    public interface IMemberService<TEntity, TDto> where TEntity : class where TDto : class
+    public interface IMemberService : IGenericService<Member, MemberDto>
     {
-        Task<IEnumerable<TDto>> GetAsync(bool tracked = true);
-        Task<TDto?> GetByIdAsync(int id);
-        Task<List<TDto?>> GetWithMemberDetailsAsync(Expression<Func<TEntity, object>> include);
+        Task<List<MemberDto?>> GetWithMemberDetailsAsync(Expression<Func<Member, object>> include);
     }
 }
