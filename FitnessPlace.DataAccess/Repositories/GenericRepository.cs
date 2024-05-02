@@ -48,7 +48,7 @@ namespace FitnessPlace.DataAccess.Repositories
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task<IEnumerable<T>> GetWithSpecification(Specification<T>? specification = null)
+        public async Task<IEnumerable<T>> GetWithSpecificationAsync(Specification<T>? specification = null)
         {
             IQueryable<T?> query = _dbSet;
             return await SpecificationQueryBuilder.GetQuery(query, specification).ToListAsync();

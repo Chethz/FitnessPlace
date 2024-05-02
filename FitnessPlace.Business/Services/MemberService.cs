@@ -31,14 +31,14 @@ namespace FitnessPlace.Business.Services
             return _mapper.Map<MemberDto>(result);
         }
 
-        public async Task<IEnumerable<MemberDto>> GetAllWithMemberDetailsSpecification()
+        public async Task<IEnumerable<MemberDto>> GetAllWithMemberDetailsSpecificationAsync()
         {
             var spec = new MemberWithDetails();
-            var result = await _membersRepository.GetWithSpecification(spec);
+            var result = await _membersRepository.GetWithSpecificationAsync(spec);
             return _mapper.Map<List<MemberDto>>(result);
         }
 
-        public async Task<MemberDto> GetWithMemberDetails(int id)
+        public async Task<MemberDto> GetWithMemberDetailsAsync(int id)
         {
             var spec = new MemberWithDetails(id);
             var result = await _membersRepository.GetByIdWithSpecificationAsync(spec);
