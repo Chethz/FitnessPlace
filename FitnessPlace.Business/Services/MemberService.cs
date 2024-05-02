@@ -37,5 +37,12 @@ namespace FitnessPlace.Business.Services
             var result = await _membersRepository.GetWithSpecification(spec);
             return _mapper.Map<List<MemberDto>>(result);
         }
+
+        public async Task<MemberDto> GetWithMemberDetails(int id)
+        {
+            var spec = new MemberWithDetails(id);
+            var result = await _membersRepository.GetByIdWithSpecificationAsync(spec);
+            return _mapper.Map<MemberDto>(result);
+        }
     }
 }
