@@ -42,5 +42,18 @@ namespace FitnessPlace.API.Controller
             }
             return Ok(await _service.GetByIdAsync(id));
         }
+
+        [HttpGet("memberdetails/{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<MemberDto>> GetMemberWithMemberDetailsById(int id)
+        {
+            if (id < 1)
+            {
+                return BadRequest("Id must be grater than 0");
+            }
+            return Ok(await _service.GetWithMemberDetails(id));
+        }
     }
 }
