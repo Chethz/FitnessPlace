@@ -1,7 +1,5 @@
-using System.Linq.Expressions;
 using FitnessPlace.Business.DTOs;
 using FitnessPlace.Business.Services.IServices;
-using FitnessPlace.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessPlace.API.Controller
@@ -24,11 +22,12 @@ namespace FitnessPlace.API.Controller
             return Ok(await _service.GetAsync());
         }
 
-        [HttpGet("details")]
+        [HttpGet("withdetails")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> GetWithMemberDetailsAsync()
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult GetWithMemberDetails()
         {
-            return Ok(await _service.GetMemberWithDetailsAsync());
+            return Ok(_service.GetAllWithMemberDetailsSpecification());
         }
 
         [HttpGet("{id:int}")]
