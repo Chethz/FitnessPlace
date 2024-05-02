@@ -54,6 +54,12 @@ namespace FitnessPlace.DataAccess.Repositories
             return await SpecificationQueryBuilder.GetQuery(query, specification).ToListAsync();
         }
 
+        public async Task<T> GetByIdWithSpecificationAsync(Specification<T>? specification = null)
+        {
+            IQueryable<T?> query = _dbSet;
+            return await SpecificationQueryBuilder.GetQuery(query, specification).FirstOrDefaultAsync();
+        }
+
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
