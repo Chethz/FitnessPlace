@@ -25,9 +25,9 @@ namespace FitnessPlace.API.Controller
         [HttpGet("withdetails")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult GetWithMemberDetails()
+        public async Task<ActionResult> GetWithMemberDetails()
         {
-            return Ok(_service.GetAllWithMemberDetailsSpecification());
+            return Ok(await _service.GetAllWithMemberDetailsSpecificationAsync());
         }
 
         [HttpGet("{id:int}")]
@@ -53,7 +53,7 @@ namespace FitnessPlace.API.Controller
             {
                 return BadRequest("Id must be grater than 0");
             }
-            return Ok(await _service.GetWithMemberDetails(id));
+            return Ok(await _service.GetWithMemberDetailsAsync(id));
         }
     }
 }
