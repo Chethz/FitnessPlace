@@ -1,8 +1,8 @@
-using System.Linq.Expressions;
 using AutoMapper;
 using FitnessPlace.Business.DTOs;
 using FitnessPlace.Business.Exceptions;
 using FitnessPlace.Business.Services.IServices;
+using FitnessPlace.Business.Specifications;
 using FitnessPlace.DataAccess.Interfaces;
 using FitnessPlace.DataAccess.Models;
 
@@ -31,10 +31,11 @@ namespace FitnessPlace.Business.Services
             return _mapper.Map<MemberDto>(result);
         }
 
-        public async Task<List<MemberDto?>> GetMemberWithDetailsAsync()
+        public async Task<IEnumerable<MemberDto>> GetAllWithMemberDetailsSpecification()
         {
-            var result = await _membersRepository.GetWithIncludeAsync(item => item.MemberDetail) ?? throw new EntityNotFoundException("Member not found.");
-            return _mapper.Map<List<MemberDto?>>(result);
+            var spec = new MemberWithDetails();
+            var result = await _membersRepository.GetWithSpecification(spec);
+            return _mapper.Map<List<MemberDto>>(result);
         }
     }
 }
