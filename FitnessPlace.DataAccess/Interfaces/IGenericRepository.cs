@@ -1,4 +1,4 @@
-using System.Linq.Expressions;
+using FitnessPlace.DataAccess.Specifications;
 
 namespace FitnessPlace.DataAccess.Interfaces
 {
@@ -6,7 +6,7 @@ namespace FitnessPlace.DataAccess.Interfaces
     {
         Task<IEnumerable<T?>> GetAsync(bool tracked = true);
         Task<T?> GetByIdAsync(int id);
-        Task<List<T?>> GetWithIncludeAsync(Expression<Func<T, object>> include);
+        Task<IEnumerable<T>> GetWithSpecification(Specification<T> specification = null);
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteByIdAsync(int id);

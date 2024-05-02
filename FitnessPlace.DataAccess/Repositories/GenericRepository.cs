@@ -1,5 +1,5 @@
-using System.Linq.Expressions;
 using FitnessPlace.DataAccess.Interfaces;
+using FitnessPlace.DataAccess.Specifications;
 using Microsoft.EntityFrameworkCore;
 
 namespace FitnessPlace.DataAccess.Repositories
@@ -48,10 +48,10 @@ namespace FitnessPlace.DataAccess.Repositories
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task<List<T?>> GetWithIncludeAsync(Expression<Func<T, object>> include)
+        public async Task<IEnumerable<T>> GetWithSpecification(Specification<T>? specification = null)
         {
             IQueryable<T?> query = _dbSet;
-            return await query.Include(include).ToListAsync();
+            return await SpecificationQueryBuilder.GetQuery(query, specification).ToListAsync();
         }
 
         public async Task SaveAsync()
