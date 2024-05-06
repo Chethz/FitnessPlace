@@ -24,6 +24,7 @@ builder.Services.AddDbContext<FitnessPlaceDbContext>(
                     builder.Configuration.GetConnectionString("DefaultConnection"),
                     x => x.MigrationsAssembly("FitnessPlace.DataAccess")));
 
+//Adding automapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 //Middleware
