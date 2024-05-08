@@ -59,3 +59,7 @@ To set up the project locally, follow these steps:
    ```
    git clone https://github.com/Chethz/FitnessPlace.git
    ```
+2. Run this command to create Database and Tables
+   ```
+   dotnet ef database update --project FitnessPlace.AP
+   ```
