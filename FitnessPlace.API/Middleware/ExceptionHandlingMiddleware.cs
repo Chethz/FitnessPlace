@@ -1,7 +1,6 @@
 using System.Net;
 using FitnessPlace.Business.Exceptions;
 using Microsoft.Data.SqlClient;
-using Serilog;
 
 namespace FitnessPlace.API.Middleware
 {
@@ -19,6 +18,18 @@ namespace FitnessPlace.API.Middleware
             {
                 _logger.LogError(ex, ex.Message);
                 context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                await context.Response.WriteAsync(ex.Message);
+            }
+            catch (SqlException ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                await context.Response.WriteAsync(ex.Message);
+            }
+            catch (BadHttpRequestException ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 await context.Response.WriteAsync(ex.Message);
             }
             catch (Exception ex)
