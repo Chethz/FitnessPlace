@@ -20,7 +20,7 @@ The repository pattern abstracts data access and provides a consistent interface
 
 ## Specification Pattern
 
-In addition to the repository pattern, FitnessPlace utilizes the Specification Pattern. This pattern defines a set of criteria and enables filtering objects in a collection based on these criteria. By using the Specification Pattern, FitnessPlace achieves a more modular and maintainable approach to defining and applying business rules, which enhances the flexibility and adaptability of the application.
+In addition to the repository pattern, FitnessPlace utilizes the Specification Pattern. This pattern defines a set of criteria and enables filtering objects in a collection based on these criteria. By using the Specification Pattern, FitnessPlace achieves a more modular and maintainable approach to defining and applying business rules, enhancing the application's flexibility and adaptability.
 
 ## Entity Framework Core
 
@@ -30,6 +30,8 @@ In addition to the repository pattern, FitnessPlace utilizes the Specification P
 
 **AutoMapper** is utilized to streamline the mapping between domain entities and Data Transfer Objects (DTOs). DTOs are lightweight objects that transfer data between layers and across network boundaries.
 
+## Serilog and Seq Logging
+**Serilog** simplifies the Logging process in C# applications through its extensive feature set and user-friendly configuration options, enabling developers to quickly log messages, errors, and other pertinent information. Structured Logging with **Seq** builds upon this foundation by emphasizing structured data, departing from conventional text-based logs. Seq empowers developers to log data in a structured format, facilitating streamlined search, analysis, and visualization of log information. Its web-based interface enables seamless exploration of log data, query execution, and customization of dashboards, enhancing the overall logging experience.
 
 ## Project Structure
 
