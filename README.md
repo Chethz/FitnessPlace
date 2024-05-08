@@ -61,5 +61,5 @@ To set up the project locally, follow these steps:
    ```
 2. Run this command to add migrations:
    ```
-   dotnet ef database update --project FitnessPlace.AP
+   dotnet ef database update --project FitnessPlace.API
    ```
