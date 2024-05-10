@@ -91,6 +91,10 @@ namespace FitnessPlace.API.Controller
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Member>> Update(int id, MemberCreateDto memberDto)
         {
+            if (id < 1)
+            {
+                return BadRequest("Id must be grater tha 0");
+            }
             var member = new Member
             {
                 FirstName = memberDto.FirstName,
