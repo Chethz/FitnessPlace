@@ -1,5 +1,6 @@
 using FitnessPlace.Business.DTOs;
 using FitnessPlace.Business.Services.IServices;
+using FitnessPlace.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessPlace.API.Controller
@@ -54,6 +55,50 @@ namespace FitnessPlace.API.Controller
                 return BadRequest("Id must be grater than 0");
             }
             return Ok(await _service.GetWithMemberDetailsAsync(id));
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<MemberDto>> Create(MemberCreateDto memberDto)
+        {
+            var member = new Member
+            {
+                FirstName = memberDto.FirstName,
+                LastName = memberDto.LastName,
+                MemberDetail = new MemberDetail { Address = memberDto.Address, Email = memberDto.Email, MobileNumber = memberDto.MobileNumber }
+            };
+            await _service.AddAsync(member);
+            return CreatedAtAction(nameof(GetMemberById), new { id = member.Id }, member);
+        }
+
+        [HttpDelete("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<Member>> Delete(int id)
+        {
+            if (id < 1)
+            {
+                return BadRequest("Id must be grater tha 0");
+            }
+
+            await _service.DeleteByIdAsync(id);
+            return Ok($"Member with id: {id} is deleted successfully.");
+        }
+
+        [HttpPut("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Member>> Update(int id, MemberCreateDto memberDto)
+        {
+            var member = new Member
+            {
+                FirstName = memberDto.FirstName,
+                LastName = memberDto.LastName,
+                MemberDetail = new MemberDetail { Address = memberDto.Address, Email = memberDto.Email, MobileNumber = memberDto.MobileNumber }
+            };
+
+            await _service.UpdateAsync(id, member);
+            return Ok($"Member with id: {id} is updated successfully.");
         }
     }
 }
