@@ -52,5 +52,27 @@ namespace FitnessPlace.Business.Services
             var result = await _membersRepository.GetByIdWithSpecificationAsync(spec) ?? throw new EntityNotFoundException("Member not found.");
             return _mapper.Map<MemberDto>(result);
         }
+
+        public async Task AddAsync(Member entity)
+        {
+            await _membersRepository.AddAsync(entity);
+        }
+
+        public async Task UpdateAsync(int id, Member entity)
+        {
+            // var member = await _membersRepository.GetByIdAsync(id, false) ?? throw new EntityNotFoundException("Member Not found.");
+            entity.Id = id;
+            // if (member.Id != id)
+            // {
+            //     throw new EntityNotFoundException("Member Not found."); // change to bad entity request
+            // }
+            await _membersRepository.UpdateAsync(entity);
+        }
+
+        public async Task DeleteByIdAsync(int id)
+        {
+            var member = await _membersRepository.GetByIdAsync(id) ?? throw new EntityNotFoundException("Member Not found.");
+            await _membersRepository.DeleteByIdAsync(id);
+        }
     }
 }
