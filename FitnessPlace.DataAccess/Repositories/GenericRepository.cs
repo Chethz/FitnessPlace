@@ -67,6 +67,7 @@ namespace FitnessPlace.DataAccess.Repositories
 
         public async Task UpdateAsync(T entity)
         {
+            _context.Entry(entity).State = EntityState.Modified;
             _dbSet.Update(entity);
             await SaveAsync();
         }
