@@ -88,6 +88,7 @@ namespace FitnessPlace.API.Controller
 
         [HttpPut("{id:int}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Member>> Update(int id, MemberCreateDto memberDto)
         {
             var member = new Member
@@ -98,7 +99,7 @@ namespace FitnessPlace.API.Controller
             };
 
             await _service.UpdateAsync(id, member);
-            return Ok($"Member with id: {id} is updated successfully.");
+            return Ok(memberDto);
         }
     }
 }
