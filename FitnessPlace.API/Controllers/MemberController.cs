@@ -60,7 +60,7 @@ namespace FitnessPlace.API.Controller
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<MemberDto>> Create(MemberCreateDto memberDto)
+        public async Task<ActionResult<MemberDto>> Create([FromBody] MemberCreateDto memberDto)
         {
             var member = new Member
             {
