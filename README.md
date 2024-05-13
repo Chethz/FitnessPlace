@@ -60,3 +60,12 @@ To set up the project locally, follow these steps:
    ```
    dotnet ef database update --project FitnessPlace.API
    ```
+3. Run Seq on docker or locally: <br />
+   Windows:
+   ```
+   https://docs.datalust.co/docs/getting-started
+   ```
+   Docker:
+   ```
+   https://docs.datalust.co/docs/getting-started-with-docker
+   ```
