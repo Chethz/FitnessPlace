@@ -62,6 +62,10 @@ namespace FitnessPlace.API.Controller
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<MemberDto>> Create([FromBody] MemberCreateDto memberDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var member = new Member
             {
                 FirstName = memberDto.FirstName,
