@@ -53,6 +53,12 @@ builder.Services.AddScoped(typeof(IMemberService), typeof(MemberService));
 builder.Services.AddControllers().AddJsonOptions(x =>
    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
+//Disable Model State auto validation.
+// builder.Services.Configure<Microsoft.AspNetCore.Mvc.ApiBehaviorOptions>(options =>
+// {
+//     options.SuppressModelStateInvalidFilter = true;
+// });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
