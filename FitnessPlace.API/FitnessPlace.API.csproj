@@ -30,4 +30,8 @@
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
+  
+  <ItemGroup>
+  <InternalsVisibleTo Include="FitnessPlace.API.IntegrationTests"/>
+  </ItemGroup>
 </Project>
