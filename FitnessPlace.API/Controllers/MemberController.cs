@@ -53,6 +53,7 @@ namespace FitnessPlace.API.Controller
             if (id < 1)
             {
                 return BadRequest("Id must be grater than 0");
+                //throw new ArgumentException("Id must be grater than 0", nameof(id));
             }
             return Ok(await _service.GetWithMemberDetailsAsync(id));
         }
@@ -79,7 +80,7 @@ namespace FitnessPlace.API.Controller
         {
             if (id < 1)
             {
-                return BadRequest("Id must be grater tha 0");
+                return BadRequest("Id must be grater than 0");
             }
 
             await _service.DeleteByIdAsync(id);
