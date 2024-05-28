@@ -22,26 +22,11 @@ internal class FitnessPlaceWebApplicationFactory : WebApplicationFactory<Program
 
             services.Remove(dbConnectionDescriptor);
 
-            // Create open SqliteConnection so EF won't automatically close it.
-            // services.AddSingleton<DbConnection>(container =>
-            // {
-            //     var connection = new SQLiteConnection("DataSource=:memory:");
-            //     connection.Open();
-
-            //     return connection;
-            // });
-
-            // services.AddDbContext<FitnessPlaceDbContext>((container, options) =>
-            // {
-            //     var connection = container.GetRequiredService<DbConnection>();
-            //     options.UseSqlite(connection);
-            // });
-
-            // builder.UseEnvironment("Development");
             var connectionString = GetConnectionString();
             services.AddSqlServer<FitnessPlaceDbContext>(connectionString);
 
             FitnessPlaceDbContext dbContext = CreateDbContext(services);
+            builder.UseEnvironment("Development");
         });
     }
 
